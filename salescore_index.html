@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalesCore | 営業リスト最適化サービス</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0F1E;
+    --blue-1: #2563EB;
+    --blue-2: #0EA5E9;
+    --blue-light: #60A5FA;
+    --slate: #1E293B;
+    --slate-2: #334155;
+    --muted: #94A3B8;
+    --white: #F8FAFC;
+    --accent: #38BDF8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--blue-1); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(37, 99, 235, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 30% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 700px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: var(--blue-light);
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--blue-1), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 48px;
+    line-height: 1.9;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-num span {
+    font-size: 18px;
+    color: var(--blue-light);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+    color: white;
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 16px 32px;
+    border-radius: 2px;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .hero-cta:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  .hero-cta::after {
+    content: '→';
+    font-size: 16px;
+  }
+
+  /* ===== PROBLEM ===== */
+  .section {
+    padding: 120px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+
+  .section-body {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 600px;
+    line-height: 2;
+    margin-bottom: 60px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(37,99,235,0.3), transparent);
+    margin: 0 0 120px;
+  }
+
+  /* Problem cards */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .problem-card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .problem-card:hover {
+    border-color: rgba(37, 99, 235, 0.3);
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--blue-1), var(--blue-2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .problem-card:hover::before { opacity: 1; }
+
+  .problem-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .problem-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  .problem-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 60px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+    align-items: start;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(37, 99, 235, 0.2);
+    line-height: 1;
+    padding-top: 4px;
+  }
+
+  .step-content h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .step-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  .step-tag {
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    color: var(--blue-light);
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    margin-bottom: 12px;
+  }
+
+  /* ===== PRICING ===== */
+  .pricing-wrap {
+    margin-top: 60px;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    overflow: hidden;
+  }
+
+  .pricing-header {
+    background: rgba(37, 99, 235, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+  }
+
+  .pricing-header div {
+    padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .pricing-header div:first-child {
+    border-right: 1px solid rgba(37, 99, 235, 0.2);
+  }
+
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+    transition: background 0.2s;
+  }
+
+  .pricing-row:last-child { border-bottom: none; }
+  .pricing-row:hover { background: rgba(37, 99, 235, 0.05); }
+
+  .pricing-row div {
+    padding: 20px 32px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .pricing-row div:first-child {
+    border-right: 1px solid rgba(37, 99, 235, 0.1);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .price-unit {
+    color: var(--blue-light);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+  }
+
+  .pricing-note {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ===== PROFILE ===== */
+  .profile-box {
+    margin-top: 60px;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .profile-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .profile-logo span {
+    background: linear-gradient(135deg, var(--blue-1), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .profile-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 8px;
+  }
+
+  .profile-detail h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .profile-detail p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-section {
+    padding: 120px 60px;
+    background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.05));
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-inner .section-title {
+    margin-bottom: 16px;
+  }
+
+  .contact-inner .section-body {
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    padding: 20px 40px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--blue-light);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .contact-email:hover {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.5);
+  }
+
+  .contact-note {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid rgba(37, 99, 235, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  footer .logo span { color: var(--blue-1); }
+
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge { animation: fadeUp 0.6s ease both; }
+  .hero h1 { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-sub { animation: fadeUp 0.6s ease 0.2s both; }
+  .hero-stats { animation: fadeUp 0.6s ease 0.3s both; }
+  .hero-cta { animation: fadeUp 0.6s ease 0.4s both; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .section { padding: 80px 24px; }
+    .hero-stats { gap: 24px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .profile-box { grid-template-columns: 1fr; }
+    .contact-section { padding: 80px 24px; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sales<span>Core</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">課題</a></li>
+    <li><a href="#service">サービス</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Sales List Optimization</div>
+    <h1>営業リストの<br><span class="grad">「埋もれた見込み客」</span>を<br>AIで自動検出する</h1>
+    <p class="hero-sub">CSVを送るだけ。AIが自動でスコアリング・優先順位付けを行い、今すぐアタックすべき相手だけを絞り込んだExcelレポートをお返しします。</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">600<span>件+</span></div>
+        <div class="stat-label">検証済みリスト件数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">¥35<span>/件〜</span></div>
+        <div class="stat-label">業界最安水準</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0<span>円</span></div>
+        <div class="stat-label">初期費用・導入費用</div>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta">無料相談はこちら</a>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div style="max-width:1100px; margin:0 auto; padding:0 60px;">
+  <div class="divider"></div>
+</div>
+
+<section class="section" id="problem">
+  <div class="section-label">Problem</div>
+  <h2 class="section-title">なぜリストは<br>汚れていくのか</h2>
+  <p class="section-body">時給制の営業マンは不通なのをわかりながらかけ続ける方が時給が稼げて楽で、トップ営業は結果を出すためにわざわざメンテする時間が惜しい。構造的に、リストは放置されます。</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">📞</div>
+      <h3>無効な番号がリストに残り続ける</h3>
+      <p>「現在使われておりません」のアナウンスが流れても、誰もリストを更新しない。全員が同じ番号を回し続ける。</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔍</div>
+      <h3>見込み客を見落としている</h3>
+      <p>「NG」扱いになっているが、実は担当者に繋がっていた会社が存在する。誰もそこに気づいていない。</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⏱️</div>
+      <h3>優先順位なく全件回している</h3>
+      <p>リストの上から順番にかけ続けるだけ。どこから攻めるべきかを考える仕組みがない。</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">💸</div>
+      <h3>これが全部コストになっている</h3>
+      <p>無駄なアプローチにかかる時間・人件費。リストの質を上げるだけで、同じ工数でアポ率は変わる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<div style="max-width:1100px; margin:0 auto; padding:0 60px;">
+  <div class="divider"></div>
+</div>
+
+<section class="section" id="service">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">流れはこれだけです</h2>
+  <p class="section-body">打ち合わせなし。システム導入なし。メール完結。テレアポ・メール営業・展示会名刺リスト・インバウンドリード、形式は問いません。</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-tag">送信</div>
+        <h3>営業リスト（CSV）をメールで送る</h3>
+        <p>カラム名の揺れ（「通電済み」でも「通電」でも）に自動で対応します。特別なフォーマットへの変換は不要です。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-tag">分析</div>
+        <h3>AIが各件をスコアリング・分類</h3>
+        <p>ステータス・接触履歴・担当者情報をもとに自動スコアリング。AIによる補正で精度を高めます。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-tag">納品</div>
+        <h3>優先度別に色分けされたExcelレポートをお返し</h3>
+        <p>今すぐ架電すべき企業が一目でわかるレポートをお返しします。営業担当者がそのまま使える形で納品します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<div style="max-width:1100px; margin:0 auto; padding:0 60px;">
+  <div class="divider"></div>
+</div>
+
+<section class="section" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">料金</h2>
+  <p class="section-body">件数が増えるほど1件あたりの単価が下がります。初期費用・導入費用は一切かかりません。</p>
+
+  <div class="pricing-wrap">
+    <div class="pricing-header">
+      <div>件数</div>
+      <div>単価 / 件</div>
+    </div>
+    <div class="pricing-row">
+      <div>〜500件</div>
+      <div><span class="price-unit">¥35</span> / 件</div>
+    </div>
+    <div class="pricing-row">
+      <div>501〜1,000件</div>
+      <div><span class="price-unit">¥30</span> / 件</div>
+    </div>
+    <div class="pricing-row">
+      <div>1,001〜3,000件</div>
+      <div><span class="price-unit">¥25</span> / 件</div>
+    </div>
+    <div class="pricing-row">
+      <div>3,001〜5,000件</div>
+      <div><span class="price-unit">¥20</span> / 件</div>
+    </div>
+    <div class="pricing-row">
+      <div>5,001〜10,000件</div>
+      <div><span class="price-unit">¥16</span> / 件</div>
+    </div>
+    <div class="pricing-row">
+      <div>10,001件〜</div>
+      <div><span class="price-unit">要相談</span></div>
+    </div>
+  </div>
+  <p class="pricing-note">例：1,000件 → 約¥30,000　／　5,000件 → 約¥80,000</p>
+</section>
+
+<!-- PROFILE -->
+<div style="max-width:1100px; margin:0 auto; padding:0 60px;">
+  <div class="divider"></div>
+</div>
+
+<section class="section" id="profile">
+  <div class="section-label">Profile</div>
+  <h2 class="section-title">運営者について</h2>
+
+  <div class="profile-box">
+    <div>
+      <div class="profile-logo">Sales<span>Core</span></div>
+      <div class="profile-tagline">Sales List Optimization</div>
+    </div>
+    <div class="profile-detail">
+      <h3>インサイドセールス・フィールドセールスにてトップセールス経験</h3>
+      <p>複数の営業現場でトップセールスを経験後、PythonとAIを用いた営業リストの自動スコアリング・最適化システムを開発。国立大学大学院（数理統計専攻）在籍。営業現場の課題を統計とAIで解決します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="text-align:center;">Contact</div>
+    <h2 class="section-title">お問い合わせ</h2>
+    <p class="section-body">「うちのリスト、対応できる？」という確認だけでも大歓迎です。まずはお気軽にご連絡ください。</p>
+    <a href="mailto:info.salescore@gmail.com" class="contact-email">
+      📩 info.salescore@gmail.com
+    </a>
+    <p class="contact-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Sales<span>Core</span></div>
+  <p>© 2026 SalesCore. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
