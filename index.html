@@ -4,26 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ListScore — Sales List Optimization</title>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+JP:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #0a0a0a;
-    --surface: #141414;
-    --surface2: #1c1c1c;
-    --border: #2a2a2a;
-    --white: #f5f5f3;
-    --muted: #888;
-    --accent: #f5f5f3;
-    --blue: #3b6bff;
+    --black: #0d0d0d;
+    --white: #f5f5f0;
+    --muted: #999;
+    --border: #e0e0e0;
+    --accent: #0d0d0d;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--black);
-    color: var(--white);
+    background: var(--white);
+    color: var(--black);
     font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     line-height: 1.6;
@@ -38,93 +34,95 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 48px;
+    padding: 0 60px;
     height: 64px;
-    background: rgba(10,10,10,0.85);
+    background: rgba(245,245,240,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
 
   .nav-logo {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 22px;
-    color: var(--white);
-    letter-spacing: -0.03em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--black);
+    letter-spacing: 0.05em;
     text-decoration: none;
   }
 
   .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 40px;
     list-style: none;
+    align-items: center;
   }
 
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover { color: var(--black); }
 
   .nav-cta {
-    background: var(--white);
-    color: var(--black) !important;
-    padding: 8px 20px;
-    border-radius: 6px;
-    font-weight: 700 !important;
-    font-size: 13px !important;
-    transition: opacity 0.2s !important;
+    background: var(--black) !important;
+    color: var(--white) !important;
+    padding: 8px 24px !important;
+    border-radius: 2px;
   }
 
-  .nav-cta:hover { opacity: 0.85; }
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::before {
+    content: '—';
+    color: var(--muted);
+  }
 
   /* ── HERO ── */
   #hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 24px 80px;
-    position: relative;
-    overflow: hidden;
+    justify-content: flex-end;
+    padding: 120px 60px 80px;
+    border-bottom: 1px solid var(--border);
   }
 
-  #hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; left: 50%;
-    transform: translateX(-50%);
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(59,107,255,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-label {
-    display: inline-block;
+  .hero-eyebrow {
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 
+  .hero-eyebrow::before { content: '—'; }
+
   .hero-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(44px, 7vw, 88px);
-    line-height: 1.0;
-    letter-spacing: -0.04em;
-    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 160px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--black);
     max-width: 900px;
-    margin-bottom: 32px;
+    margin-bottom: 48px;
   }
 
   .hero-title em {
@@ -132,85 +130,89 @@
     color: var(--muted);
   }
 
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
   .hero-sub {
-    font-size: clamp(15px, 2vw, 18px);
+    font-size: 16px;
     color: var(--muted);
-    max-width: 560px;
+    max-width: 480px;
     line-height: 1.7;
-    margin-bottom: 48px;
     font-weight: 300;
   }
 
-  .hero-sub strong {
-    color: var(--white);
-    font-weight: 500;
+  .hero-sub strong { color: var(--black); font-weight: 500; }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
   }
 
   .btn-primary {
     display: inline-block;
-    background: var(--white);
-    color: var(--black);
+    background: var(--black);
+    color: var(--white);
     text-decoration: none;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 15px;
-    letter-spacing: -0.01em;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     padding: 16px 40px;
-    border-radius: 8px;
-    transition: opacity 0.2s, transform 0.2s;
+    border-radius: 2px;
+    transition: opacity 0.2s;
   }
 
-  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary:hover { opacity: 0.75; }
 
-  .hero-stats {
-    display: flex;
-    gap: 60px;
-    margin-top: 80px;
-    padding-top: 48px;
-    border-top: 1px solid var(--border);
-    width: 100%;
-    max-width: 600px;
-    justify-content: center;
+  /* ── STATS ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--border);
   }
 
-  .stat-item { text-align: center; }
+  .stat-item {
+    padding: 48px 60px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
 
   .stat-num {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 36px;
-    letter-spacing: -0.04em;
-    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    letter-spacing: 0.02em;
+    color: var(--black);
     display: block;
+    line-height: 1;
+    margin-bottom: 8px;
   }
 
   .stat-label {
     font-size: 12px;
     color: var(--muted);
-    letter-spacing: 0.05em;
-    margin-top: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   /* ── SECTIONS ── */
-  section {
-    padding: 120px 24px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .section-tag {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 24px;
-    display: block;
+  .section {
+    padding: 100px 60px;
+    border-bottom: 1px solid var(--border);
   }
 
   .section-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(32px, 4vw, 52px);
-    letter-spacing: -0.04em;
-    line-height: 1.1;
-    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 96px);
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    color: var(--black);
     margin-bottom: 20px;
   }
 
@@ -220,228 +222,256 @@
   }
 
   .section-desc {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--muted);
-    max-width: 560px;
-    line-height: 1.7;
+    max-width: 520px;
+    line-height: 1.75;
     font-weight: 300;
     margin-bottom: 64px;
   }
 
   /* ── PROBLEM ── */
-  #problem { border-top: 1px solid var(--border); }
-
   .problem-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
   }
 
   .problem-card {
-    background: var(--surface);
-    padding: 40px;
+    background: var(--white);
+    padding: 48px;
     transition: background 0.2s;
   }
 
-  .problem-card:hover { background: var(--surface2); }
+  .problem-card:hover { background: #f0f0eb; }
 
-  .problem-icon {
-    font-size: 28px;
-    margin-bottom: 20px;
-    display: block;
+  .problem-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 24px;
   }
 
   .problem-card h3 {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 17px;
-    letter-spacing: -0.02em;
-    color: var(--white);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
     margin-bottom: 12px;
     line-height: 1.3;
+    letter-spacing: -0.01em;
   }
 
   .problem-card p {
     font-size: 14px;
     color: var(--muted);
-    line-height: 1.65;
+    line-height: 1.7;
     font-weight: 300;
   }
 
-  /* ── HOW IT WORKS ── */
-  #service { border-top: 1px solid var(--border); }
-
+  /* ── STEPS ── */
   .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--border);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
   }
 
   .step {
-    background: var(--surface);
-    padding: 48px;
     display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 32px;
-    align-items: start;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
     transition: background 0.2s;
   }
 
-  .step:hover { background: var(--surface2); }
+  .step:last-child { border-bottom: none; }
+  .step:hover { background: #f0f0eb; }
 
   .step-num {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 48px;
-    letter-spacing: -0.05em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
     color: var(--border);
     line-height: 1;
+    padding: 40px 40px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+
+  .step-content {
+    padding: 40px 48px;
   }
 
   .step-content h3 {
-    font-family: 'Archivo Black', sans-serif;
     font-size: 20px;
-    letter-spacing: -0.02em;
-    color: var(--white);
+    font-weight: 700;
+    color: var(--black);
     margin-bottom: 12px;
+    letter-spacing: -0.02em;
   }
 
   .step-content p {
     font-size: 14px;
     color: var(--muted);
-    line-height: 1.65;
+    line-height: 1.7;
     font-weight: 300;
   }
 
   /* ── PRICING ── */
-  #pricing { border-top: 1px solid var(--border); }
-
   .pricing-table {
     border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
     margin-bottom: 24px;
   }
 
   .pricing-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 20px 40px;
+    padding: 24px 48px;
     border-bottom: 1px solid var(--border);
     align-items: center;
     transition: background 0.15s;
   }
 
   .pricing-row:last-child { border-bottom: none; }
-
-  .pricing-row:not(.pricing-head):hover { background: var(--surface); }
+  .pricing-row:not(.pricing-head):hover { background: #f0f0eb; }
 
   .pricing-head {
-    background: var(--surface2);
+    background: var(--black);
+    color: var(--white);
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
   }
 
   .pricing-row .range {
     font-size: 15px;
-    color: var(--white);
+    color: var(--black);
     font-weight: 500;
   }
 
   .pricing-row .price {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 20px;
-    letter-spacing: -0.03em;
-    color: var(--white);
-  }
-
-  .pricing-row.featured {
-    background: var(--surface);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.02em;
+    color: var(--black);
   }
 
   .pricing-note {
     font-size: 13px;
     color: var(--muted);
-    text-align: center;
     font-weight: 300;
   }
 
-  .pricing-note strong {
-    color: var(--white);
-    font-weight: 500;
-  }
+  .pricing-note strong { color: var(--black); font-weight: 500; }
 
   /* ── PROFILE ── */
-  #profile-section { border-top: 1px solid var(--border); }
-
-  .profile-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 56px;
+  .profile-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
   }
 
   .profile-name {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 32px;
-    letter-spacing: -0.04em;
-    margin-bottom: 6px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    margin-bottom: 16px;
   }
 
   .profile-subtitle {
-    font-size: 13px;
+    font-size: 11px;
     color: var(--muted);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
 
   .profile-bio {
     font-size: 16px;
     color: var(--muted);
-    line-height: 1.75;
-    max-width: 640px;
+    line-height: 1.8;
     font-weight: 300;
   }
 
+  /* ── ARTICLES ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .article-card {
+    background: var(--white);
+    padding: 40px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    display: block;
+  }
+
+  .article-card:hover { background: #f0f0eb; }
+
+  .article-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .article-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  .article-arrow {
+    font-size: 20px;
+    color: var(--muted);
+    margin-top: 24px;
+    display: block;
+    transition: transform 0.2s;
+  }
+
+  .article-card:hover .article-arrow { transform: translateX(4px); }
+
   /* ── CONTACT ── */
   #contact {
-    border-top: 1px solid var(--border);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .contact-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 64px;
-    width: 100%;
-    max-width: 640px;
+  .contact-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 8vw, 128px);
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    margin-bottom: 48px;
+    max-width: 800px;
   }
 
   .contact-email {
     display: inline-block;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(18px, 3vw, 26px);
-    letter-spacing: -0.02em;
-    color: var(--white);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--black);
     text-decoration: none;
-    margin: 32px 0;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
     transition: opacity 0.2s;
   }
 
-  .contact-email:hover { opacity: 0.6; }
+  .contact-email:hover { opacity: 0.5; }
 
   .contact-note {
     font-size: 13px;
@@ -452,17 +482,17 @@
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 32px 48px;
+    padding: 32px 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .footer-logo {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 16px;
-    letter-spacing: -0.03em;
-    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    color: var(--black);
   }
 
   .footer-copy {
@@ -471,17 +501,23 @@
   }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    nav { padding: 0 20px; }
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
     .nav-links { display: none; }
+    #hero { padding: 100px 24px 60px; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; }
+    .hero-actions { align-items: flex-start; }
+    .stats-bar { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+    .section { padding: 64px 24px; }
     .problem-grid { grid-template-columns: 1fr; }
-    .step { grid-template-columns: 1fr; gap: 12px; }
-    .step-num { font-size: 32px; }
-    section { padding: 80px 20px; }
-    .profile-card { padding: 36px 24px; }
-    .contact-card { padding: 40px 24px; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
-    .hero-stats { gap: 32px; }
+    .step { grid-template-columns: 80px 1fr; }
+    .step-num { font-size: 48px; padding: 24px; }
+    .step-content { padding: 24px; }
+    .pricing-row { padding: 20px 24px; }
+    .profile-inner { grid-template-columns: 1fr; gap: 40px; }
+    .articles-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
   }
 </style>
 </head>
@@ -494,57 +530,62 @@
     <li><a href="#problem">課題</a></li>
     <li><a href="#service">サービス</a></li>
     <li><a href="#pricing">料金</a></li>
-    <li><a href="#contact" class="nav-cta">無料相談</a></li>
+    <li><a href="#articles">記事</a></li>
+    <li><a href="#contact" class="nav-cta">問い合わせ</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <div id="hero">
-  <span class="hero-label">Sales List Optimization</span>
-  <h1 class="hero-title">営業リストの<br><em>「埋もれた見込み客」</em>を<br>AIで自動検出する</h1>
-  <p class="hero-sub">
-    <strong>CSVを送るだけ。</strong>AIが自動でスコアリング・優先順位付けを行い、今すぐアタックすべき相手だけを絞り込んだExcelレポートをお返しします。
-  </p>
-  <a href="#contact" class="btn-primary">無料相談はこちら</a>
-  <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-num">600+</span>
-      <span class="stat-label">検証済みリスト件数</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">¥35〜</span>
-      <span class="stat-label">業界最安水準 / 件</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">¥0</span>
-      <span class="stat-label">初期費用・導入費用</span>
+  <p class="hero-eyebrow">Sales List Optimization</p>
+  <h1 class="hero-title">営業リストの<br><em>「埋もれた</em><br>見込み客」を<br>AIで検出する。</h1>
+  <div class="hero-bottom">
+    <p class="hero-sub"><strong>CSVまたはExcelを送るだけ。</strong>AIが自動でスコアリング・優先順位付けを行い、今すぐアタックすべき相手だけを絞り込んだExcelレポートをお返しします。打ち合わせなし。システム導入なし。メール完結。</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">無料相談はこちら</a>
     </div>
   </div>
 </div>
 
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">600+</span>
+    <span class="stat-label">検証済みリスト件数</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">¥35〜</span>
+    <span class="stat-label">業界最安水準 / 件</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">¥0</span>
+    <span class="stat-label">初期費用・導入費用</span>
+  </div>
+</div>
+
 <!-- PROBLEM -->
-<section id="problem">
-  <span class="section-tag">Problem</span>
-  <h2 class="section-title">なぜリストは<br><em>汚れていくのか</em></h2>
+<section class="section" id="problem">
+  <p class="section-label">Problem</p>
+  <h2 class="section-title">なぜリストは<br><em>汚れていくのか。</em></h2>
   <p class="section-desc">時給制の営業マンは不通なのをわかりながらかけ続ける方が楽で、トップ営業はメンテする時間が惜しい。構造的に、リストは放置されます。</p>
   <div class="problem-grid">
     <div class="problem-card">
-      <span class="problem-icon">📞</span>
+      <p class="problem-num">01</p>
       <h3>無効な番号がリストに残り続ける</h3>
       <p>「現在使われておりません」のアナウンスが流れても、誰もリストを更新しない。全員が同じ番号を回し続ける。</p>
     </div>
     <div class="problem-card">
-      <span class="problem-icon">🔍</span>
+      <p class="problem-num">02</p>
       <h3>見込み客を見落としている</h3>
       <p>「NG」扱いになっているが、実は担当者に繋がっていた会社が存在する。誰もそこに気づいていない。</p>
     </div>
     <div class="problem-card">
-      <span class="problem-icon">⏱️</span>
+      <p class="problem-num">03</p>
       <h3>優先順位なく全件回している</h3>
       <p>リストの上から順番にかけ続けるだけ。どこから攻めるべきかを考える仕組みがない。</p>
     </div>
     <div class="problem-card">
-      <span class="problem-icon">💸</span>
+      <p class="problem-num">04</p>
       <h3>これが全部コストになっている</h3>
       <p>無駄なアプローチにかかる時間・人件費。リストの質を上げるだけで、同じ工数でアポ率は変わる。</p>
     </div>
@@ -552,9 +593,9 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="service">
-  <span class="section-tag">How It Works</span>
-  <h2 class="section-title">流れは<em>これだけです</em></h2>
+<section class="section" id="service">
+  <p class="section-label">How It Works</p>
+  <h2 class="section-title">流れは<br><em>これだけです。</em></h2>
   <p class="section-desc">打ち合わせなし。システム導入なし。メール完結。テレアポ・メール営業・展示会名刺リスト・インバウンドリード、形式は問いません。</p>
   <div class="steps">
     <div class="step">
@@ -582,9 +623,9 @@
 </section>
 
 <!-- PRICING -->
-<section id="pricing">
-  <span class="section-tag">Pricing</span>
-  <h2 class="section-title">料金</h2>
+<section class="section" id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">料金。</h2>
   <p class="section-desc">件数が増えるほど1件あたりの単価が下がります。初期費用・導入費用は一切かかりません。</p>
   <div class="pricing-table">
     <div class="pricing-row pricing-head">
@@ -599,7 +640,7 @@
       <span class="range">501〜1,000件</span>
       <span class="price">¥30</span>
     </div>
-    <div class="pricing-row featured">
+    <div class="pricing-row">
       <span class="range">1,001〜3,000件</span>
       <span class="price">¥25</span>
     </div>
@@ -613,31 +654,74 @@
     </div>
     <div class="pricing-row">
       <span class="range">10,001件〜</span>
-      <span class="price" style="font-size:16px;color:var(--muted);">要相談</span>
+      <span class="price" style="font-size:20px;font-family:'DM Sans';font-weight:500;">要相談</span>
     </div>
   </div>
   <p class="pricing-note">例：<strong>1,000件 → 約¥30,000</strong>　／　<strong>5,000件 → 約¥80,000</strong></p>
 </section>
 
+<!-- ARTICLES -->
+<section class="section" id="articles">
+  <p class="section-label">Intelligence</p>
+  <h2 class="section-title">営業の<br><em>現場から。</em></h2>
+  <p class="section-desc">複数社でトップセールスを経験した現場の視点で、営業リストと営業技術について書いています。</p>
+  <div class="articles-grid">
+    <a class="article-card" href="#">
+      <span class="article-tag">テレアポ</span>
+      <p class="article-title">受付突破の最強パターン。説明しない、要件を言わない、雰囲気だけで通す。</p>
+      <span class="article-arrow">→</span>
+    </a>
+    <a class="article-card" href="#">
+      <span class="article-tag">営業心理</span>
+      <p class="article-title">テレアポも恋愛も同じだ。打診していないのにアポは取れない。</p>
+      <span class="article-arrow">→</span>
+    </a>
+    <a class="article-card" href="#">
+      <span class="article-tag">営業リスト</span>
+      <p class="article-title">誰もリストのステータスを変えない。悪意じゃなく、構造の問題だ。</p>
+      <span class="article-arrow">→</span>
+    </a>
+    <a class="article-card" href="#">
+      <span class="article-tag">テレアポ代行</span>
+      <p class="article-title">テレアポ代行が高いのは、構造上の問題である。</p>
+      <span class="article-arrow">→</span>
+    </a>
+    <a class="article-card" href="#">
+      <span class="article-tag">営業組織</span>
+      <p class="article-title">時給制営業マンがアポを取らない本当の理由。</p>
+      <span class="article-arrow">→</span>
+    </a>
+    <a class="article-card" href="#">
+      <span class="article-tag">テレアポ</span>
+      <p class="article-title">テレアポは質より量だ。ただしリストだけは別の話。</p>
+      <span class="article-arrow">→</span>
+    </a>
+  </div>
+</section>
+
 <!-- PROFILE -->
-<section id="profile-section">
-  <span class="section-tag">Profile</span>
-  <h2 class="section-title">運営者について</h2>
-  <div class="profile-card">
-    <p class="profile-name">ListScore</p>
-    <p class="profile-subtitle">Sales List Optimization</p>
-    <p class="profile-bio">インサイドセールス・フィールドセールスにてトップセールス経験。複数の営業現場でトップセールスを経験後、PythonとAIを用いた営業リストの自動スコアリング・最適化システムを開発。国立大学大学院（数理統計専攻）在籍。営業現場の課題を統計とAIで解決します。</p>
+<section class="section" id="profile">
+  <p class="section-label">Profile</p>
+  <div class="profile-inner">
+    <div>
+      <p class="profile-name">List<br>Score</p>
+      <p class="profile-subtitle">Sales List Optimization</p>
+    </div>
+    <div>
+      <p class="profile-bio">インサイドセールス・フィールドセールスにてトップセールス経験。複数の営業現場でトップセールスを経験後、PythonとAIを用いた営業リストの自動スコアリング・最適化システムを開発。国立大学大学院（数理統計専攻）在籍。営業現場の課題を統計とAIで解決します。</p>
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <span class="section-tag">Contact</span>
-  <h2 class="section-title" style="margin-bottom:48px;">お問い合わせ</h2>
-  <div class="contact-card">
-    <p style="font-size:15px;color:var(--muted);font-weight:300;">「うちのリスト、対応できる？」という確認だけでも大歓迎です。<br>まずはお気軽にご連絡ください。</p>
-    <a class="contact-email" href="mailto:info.listscore@gmail.com">📩 info.listscore@gmail.com</a>
-    <p class="contact-note">通常1営業日以内にご返信します</p>
+<section class="section" id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="contact-title">まず、<br>送ってみてください。</h2>
+  <p style="font-size:15px;color:var(--muted);font-weight:300;margin-bottom:40px;max-width:480px;text-align:center;line-height:1.7;">「うちのリスト、対応できる？」という確認だけでも大歓迎です。</p>
+  <a class="contact-email" href="mailto:info.salescore@gmail.com">📩 info.salescore@gmail.com</a>
+  <p class="contact-note">通常1営業日以内にご返信します</p>
+  <div style="margin-top:48px;">
+    <a href="mailto:info.salescore@gmail.com" class="btn-primary">問い合わせる</a>
   </div>
 </section>
 
