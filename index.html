@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ListScore — Sales List Optimization</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+JP:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #0d0d0d;
     --white: #f5f5f0;
     --muted: #999;
     --border: #e0e0e0;
-    --accent: #0d0d0d;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,24 +33,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 60px;
-    height: 64px;
-    background: rgba(245,245,240,0.92);
+    padding: 0 48px;
+    height: 56px;
+    background: rgba(245,245,240,0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
 
   .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     color: var(--black);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-decoration: none;
   }
 
   .nav-links {
     display: flex;
-    gap: 40px;
+    gap: 32px;
     list-style: none;
     align-items: center;
   }
@@ -59,7 +58,7 @@
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -71,58 +70,55 @@
   .nav-cta {
     background: var(--black) !important;
     color: var(--white) !important;
-    padding: 8px 24px !important;
+    padding: 7px 20px !important;
     border-radius: 2px;
   }
 
-  /* ── SECTION LABELS ── */
+  /* ── SECTION LABEL ── */
   .section-label {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 48px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
   }
 
-  .section-label::before {
-    content: '—';
-    color: var(--muted);
-  }
+  .section-label::before { content: '—'; }
 
   /* ── HERO ── */
   #hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 120px 60px 80px;
+    justify-content: center;
+    padding: 80px 48px 48px;
     border-bottom: 1px solid var(--border);
   }
 
   .hero-eyebrow {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
   }
 
   .hero-eyebrow::before { content: '—'; }
 
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 10vw, 160px);
-    line-height: 0.92;
+    font-size: clamp(48px, 7vw, 100px);
+    line-height: 0.95;
     letter-spacing: 0.01em;
     color: var(--black);
-    max-width: 900px;
-    margin-bottom: 48px;
+    max-width: 800px;
+    margin-bottom: 32px;
   }
 
   .hero-title em {
@@ -134,38 +130,32 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 40px;
+    gap: 32px;
   }
 
   .hero-sub {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--muted);
-    max-width: 480px;
+    max-width: 440px;
     line-height: 1.7;
     font-weight: 300;
   }
 
   .hero-sub strong { color: var(--black); font-weight: 500; }
 
-  .hero-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 16px;
-  }
-
   .btn-primary {
     display: inline-block;
     background: var(--black);
     color: var(--white);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 16px 40px;
+    padding: 14px 32px;
     border-radius: 2px;
     transition: opacity 0.2s;
+    white-space: nowrap;
   }
 
   .btn-primary:hover { opacity: 0.75; }
@@ -178,7 +168,7 @@
   }
 
   .stat-item {
-    padding: 48px 60px;
+    padding: 28px 48px;
     border-right: 1px solid var(--border);
   }
 
@@ -186,34 +176,34 @@
 
   .stat-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 64px;
+    font-size: 44px;
     letter-spacing: 0.02em;
     color: var(--black);
     display: block;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   .stat-label {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--muted);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
   /* ── SECTIONS ── */
   .section {
-    padding: 100px 60px;
+    padding: 64px 48px;
     border-bottom: 1px solid var(--border);
   }
 
   .section-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 6vw, 96px);
+    font-size: clamp(36px, 4vw, 64px);
     letter-spacing: 0.01em;
     line-height: 0.95;
     color: var(--black);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .section-title em {
@@ -222,12 +212,12 @@
   }
 
   .section-desc {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--muted);
-    max-width: 520px;
+    max-width: 480px;
     line-height: 1.75;
     font-weight: 300;
-    margin-bottom: 64px;
+    margin-bottom: 40px;
   }
 
   /* ── PROBLEM ── */
@@ -241,123 +231,119 @@
 
   .problem-card {
     background: var(--white);
-    padding: 48px;
+    padding: 32px;
     transition: background 0.2s;
   }
 
-  .problem-card:hover { background: #f0f0eb; }
+  .problem-card:hover { background: #efefea; }
 
   .problem-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
+    font-size: 36px;
     color: var(--border);
     line-height: 1;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   .problem-card h3 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--black);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     line-height: 1.3;
     letter-spacing: -0.01em;
   }
 
   .problem-card p {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.65;
     font-weight: 300;
   }
 
   /* ── STEPS ── */
-  .steps {
-    border: 1px solid var(--border);
-  }
+  .steps { border: 1px solid var(--border); }
 
   .step {
     display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 0;
+    grid-template-columns: 80px 1fr;
     border-bottom: 1px solid var(--border);
     transition: background 0.2s;
   }
 
   .step:last-child { border-bottom: none; }
-  .step:hover { background: #f0f0eb; }
+  .step:hover { background: #efefea; }
 
   .step-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 80px;
+    font-size: 56px;
     color: var(--border);
     line-height: 1;
-    padding: 40px 40px;
+    padding: 24px;
     border-right: 1px solid var(--border);
     display: flex;
     align-items: center;
   }
 
-  .step-content {
-    padding: 40px 48px;
-  }
+  .step-content { padding: 24px 32px; }
 
   .step-content h3 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--black);
-    margin-bottom: 12px;
-    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
   }
 
   .step-content p {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.65;
     font-weight: 300;
   }
 
   /* ── PRICING ── */
   .pricing-table {
     border: 1px solid var(--border);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   .pricing-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 24px 48px;
+    padding: 16px 32px;
     border-bottom: 1px solid var(--border);
     align-items: center;
     transition: background 0.15s;
   }
 
   .pricing-row:last-child { border-bottom: none; }
-  .pricing-row:not(.pricing-head):hover { background: #f0f0eb; }
+  .pricing-row:not(.pricing-head):hover { background: #efefea; }
 
   .pricing-head {
     background: var(--black);
     color: var(--white);
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    padding: 12px 32px;
   }
 
   .pricing-row .range {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--black);
     font-weight: 500;
   }
 
   .pricing-row .price {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     letter-spacing: 0.02em;
     color: var(--black);
   }
 
   .pricing-note {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--muted);
     font-weight: 300;
   }
@@ -367,29 +353,28 @@
   /* ── PROFILE ── */
   .profile-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
     align-items: start;
   }
 
   .profile-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 80px;
+    font-size: 56px;
     letter-spacing: 0.02em;
     line-height: 0.95;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .profile-subtitle {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 40px;
   }
 
   .profile-bio {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--muted);
     line-height: 1.8;
     font-weight: 300;
@@ -406,37 +391,36 @@
 
   .article-card {
     background: var(--white);
-    padding: 40px;
+    padding: 28px;
     text-decoration: none;
     color: inherit;
     transition: background 0.2s;
     display: block;
   }
 
-  .article-card:hover { background: #f0f0eb; }
+  .article-card:hover { background: #efefea; }
 
   .article-tag {
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     display: block;
   }
 
   .article-title {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--black);
     line-height: 1.35;
     letter-spacing: -0.01em;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .article-arrow {
-    font-size: 20px;
+    font-size: 16px;
     color: var(--muted);
-    margin-top: 24px;
     display: block;
     transition: transform 0.2s;
   }
@@ -453,36 +437,37 @@
 
   .contact-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(64px, 8vw, 128px);
+    font-size: clamp(48px, 6vw, 96px);
     letter-spacing: 0.01em;
     line-height: 0.95;
-    margin-bottom: 48px;
-    max-width: 800px;
+    margin-bottom: 32px;
+    max-width: 700px;
   }
 
   .contact-email {
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--black);
     text-decoration: none;
     letter-spacing: -0.01em;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     transition: opacity 0.2s;
   }
 
   .contact-email:hover { opacity: 0.5; }
 
   .contact-note {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--muted);
     font-weight: 300;
+    margin-bottom: 32px;
   }
 
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 32px 60px;
+    padding: 24px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -490,34 +475,30 @@
 
   .footer-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 0.05em;
     color: var(--black);
   }
 
-  .footer-copy {
-    font-size: 12px;
-    color: var(--muted);
-  }
+  .footer-copy { font-size: 11px; color: var(--muted); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    nav { padding: 0 24px; }
+    nav { padding: 0 20px; }
     .nav-links { display: none; }
-    #hero { padding: 100px 24px 60px; }
+    #hero { padding: 80px 20px 40px; }
     .hero-bottom { flex-direction: column; align-items: flex-start; }
-    .hero-actions { align-items: flex-start; }
     .stats-bar { grid-template-columns: 1fr; }
-    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
-    .section { padding: 64px 24px; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+    .section { padding: 48px 20px; }
     .problem-grid { grid-template-columns: 1fr; }
-    .step { grid-template-columns: 80px 1fr; }
-    .step-num { font-size: 48px; padding: 24px; }
-    .step-content { padding: 24px; }
-    .pricing-row { padding: 20px 24px; }
-    .profile-inner { grid-template-columns: 1fr; gap: 40px; }
+    .step { grid-template-columns: 60px 1fr; }
+    .step-num { font-size: 36px; padding: 16px; }
+    .step-content { padding: 16px 20px; }
+    .pricing-row { padding: 12px 20px; }
+    .profile-inner { grid-template-columns: 1fr; gap: 24px; }
     .articles-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
   }
 </style>
 </head>
@@ -541,9 +522,7 @@
   <h1 class="hero-title">営業リストの<br><em>「埋もれた</em><br>見込み客」を<br>AIで検出する。</h1>
   <div class="hero-bottom">
     <p class="hero-sub"><strong>CSVまたはExcelを送るだけ。</strong>AIが自動でスコアリング・優先順位付けを行い、今すぐアタックすべき相手だけを絞り込んだExcelレポートをお返しします。打ち合わせなし。システム導入なし。メール完結。</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">無料相談はこちら</a>
-    </div>
+    <a href="#contact" class="btn-primary">無料相談はこちら</a>
   </div>
 </div>
 
@@ -602,7 +581,7 @@
       <span class="step-num">01</span>
       <div class="step-content">
         <h3>送信 — 営業リスト（CSV・Excel）をメールで送る</h3>
-        <p>カラム名の揺れ（「通電済み」でも「通電」でも）に自動で対応します。特別なフォーマットへの変換は不要です。</p>
+        <p>カラム名の揺れに自動で対応。特別なフォーマットへの変換は不要です。</p>
       </div>
     </div>
     <div class="step">
@@ -616,7 +595,7 @@
       <span class="step-num">03</span>
       <div class="step-content">
         <h3>納品 — 優先度別に色分けされたExcelレポートをお返し</h3>
-        <p>今すぐ架電すべき企業が一目でわかるレポートをお返しします。営業担当者がそのまま使える形で納品します。</p>
+        <p>今すぐ架電すべき企業が一目でわかるレポート。営業担当者がそのまま使える形で納品します。</p>
       </div>
     </div>
   </div>
@@ -654,7 +633,7 @@
     </div>
     <div class="pricing-row">
       <span class="range">10,001件〜</span>
-      <span class="price" style="font-size:20px;font-family:'DM Sans';font-weight:500;">要相談</span>
+      <span class="price" style="font-size:16px;font-family:'DM Sans';font-weight:500;">要相談</span>
     </div>
   </div>
   <p class="pricing-note">例：<strong>1,000件 → 約¥30,000</strong>　／　<strong>5,000件 → 約¥80,000</strong></p>
@@ -707,9 +686,7 @@
       <p class="profile-name">List<br>Score</p>
       <p class="profile-subtitle">Sales List Optimization</p>
     </div>
-    <div>
-      <p class="profile-bio">インサイドセールス・フィールドセールスにてトップセールス経験。複数の営業現場でトップセールスを経験後、PythonとAIを用いた営業リストの自動スコアリング・最適化システムを開発。国立大学大学院（数理統計専攻）在籍。営業現場の課題を統計とAIで解決します。</p>
-    </div>
+    <p class="profile-bio">インサイドセールス・フィールドセールスにてトップセールス経験。複数の営業現場でトップセールスを経験後、PythonとAIを用いた営業リストの自動スコアリング・最適化システムを開発。国立大学大学院（数理統計専攻）在籍。営業現場の課題を統計とAIで解決します。</p>
   </div>
 </section>
 
@@ -717,12 +694,10 @@
 <section class="section" id="contact">
   <p class="section-label">Contact</p>
   <h2 class="contact-title">まず、<br>送ってみてください。</h2>
-  <p style="font-size:15px;color:var(--muted);font-weight:300;margin-bottom:40px;max-width:480px;text-align:center;line-height:1.7;">「うちのリスト、対応できる？」という確認だけでも大歓迎です。</p>
+  <p style="font-size:13px;color:var(--muted);font-weight:300;margin-bottom:28px;max-width:400px;text-align:center;line-height:1.7;">「うちのリスト、対応できる？」という確認だけでも大歓迎です。</p>
   <a class="contact-email" href="mailto:info.salescore@gmail.com">📩 info.salescore@gmail.com</a>
   <p class="contact-note">通常1営業日以内にご返信します</p>
-  <div style="margin-top:48px;">
-    <a href="mailto:info.salescore@gmail.com" class="btn-primary">問い合わせる</a>
-  </div>
+  <a href="mailto:info.salescore@gmail.com" class="btn-primary">問い合わせる</a>
 </section>
 
 <!-- FOOTER -->
